@@ -1,0 +1,19 @@
+{
+    "Sample Page": "Página de ejemplo",
+    "Menu Level": "Nivel menú",
+    "Level 1": "Nivel 1",
+    "Level 2": "Nivel 2",
+    "Level 3": "Nivel 3",
+    "Disabled": "Disabled",
+    "Sub Caption": "Sub Caption",
+    "Outlined": "Outlined",
+    "External Link": "Link Externo",
+    "Chip": "Chip",
+    "message": {
+        "createAccount": "Crea una cuenta",
+        "fillToAccess": "Llena los datos para iniciar sesión",
+        "newToVideoportal": "Nuevo en el videoportal",
+        "rememberThisDevice": "Recuérdame",
+        "welcomeToVideoportal": "Bienvenidos al videoportal"
+    }
+}
