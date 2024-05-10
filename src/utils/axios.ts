@@ -3,8 +3,11 @@
  */
 
 import axios from "axios";
+const baseURL = 'http://coyag-pdn.test/api/'
 
-const axiosServices = axios.create();
+const axiosServices = axios.create({
+  baseURL,
+});
 
 // interceptor for http
 axiosServices.interceptors.response.use(

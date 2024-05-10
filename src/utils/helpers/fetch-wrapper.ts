@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/stores/auth';
+import axiosServices from '../axios';
 
 export const fetchWrapper = {
     get: request('GET'),
@@ -15,9 +16,10 @@ function request(method: string) {
         };
         if (body) {
             requestOptions.headers['Content-Type'] = 'application/json';
-            requestOptions.body = JSON.stringify(body);
+            requestOptions.data = JSON.stringify(body);
         }
-        return fetch(url, requestOptions).then(handleResponse);
+        console.log("requestOptions: ", requestOptions)
+        return axiosServices(url, requestOptions).then(handleResponse);
     };
 }
 
@@ -26,30 +28,32 @@ function request(method: string) {
 function authHeader(url: any) {
     // return auth header with jwt if user is logged in and request is to the api url
     const { user } = useAuthStore();
-    const isLoggedIn = !!user?.token;
+    const isLoggedIn = !!user?.Authorization;
     const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL);
     if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.token}` };
+        return { Authorization: `Bearer ${user.Authorization}` };
     } else {
         return {};
     }
 }
 
 function handleResponse(response: any) {
-    return response.text().then((text: any) => {
-        const data = text && JSON.parse(text);
+    return response
+    
+    // return response.text().then((text: any) => {
+    //     const data = text && JSON.parse(text);
 
-        if (!response.ok) {
-            const { user, logout } = useAuthStore();
-            if ([401, 403].includes(response.status) && user) {
-                // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
-                logout();
-            }
+    //     if (!response.ok) {
+    //         const { user, logout } = useAuthStore();
+    //         if ([401, 403].includes(response.status) && user) {
+    //             // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
+    //             logout();
+    //         }
 
-            const error = (data && data.message) || response.statusText;
-            return Promise.reject(error);
-        }
+    //         const error = (data && data.message) || response.statusText;
+    //         return Promise.reject(error);
+    //     }
 
-        return data;
-    });
+    //     return data;
+    // });
 }

@@ -10,8 +10,8 @@ import facebook from '@/assets/images/svgs/facebook-icon.svg';
 const checkbox = ref(false);
 const valid = ref(false);
 const show1 = ref(false);
-const password = ref('admin123');
-const username = ref('info@wrappixel.com');
+const password = ref('password');
+const email = ref('humberto@coyag.es');
 const passwordRules = ref([
     (v: string) => !!v || 'Password is required',
     (v: string) => (v && v.length <= 10) || 'Password must be less than 10 characters'
@@ -20,7 +20,7 @@ const emailRules = ref([(v: string) => !!v || 'E-mail is required', (v: string) 
 
 function validate(values: any, { setErrors }: any) {
     const authStore = useAuthStore();
-    return authStore.login(username.value, password.value).catch((error) => setErrors({ apiError: error }));
+    return authStore.login(email.value, password.value).catch((error) => setErrors({ apiError: error }));
 }
 </script>
 
@@ -45,9 +45,9 @@ function validate(values: any, { setErrors }: any) {
         </div>  
     </div>
     <Form @submit="validate" v-slot="{ errors, isSubmitting }" class="mt-5">
-        <v-label class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">Username</v-label>
+        <v-label class="text-subtitle-1 font-weight-semibold pb-2 text-lightText">email</v-label>
         <VTextField
-            v-model="username"
+            v-model="email"
             :rules="emailRules"
             class="mb-8"
             required
