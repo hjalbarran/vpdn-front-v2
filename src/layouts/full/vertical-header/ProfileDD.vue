@@ -3,6 +3,10 @@ import { MailIcon } from 'vue-tabler-icons';
 import { profileDD } from '@/_mockApis/headerData';
 
 import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore()
+userStore.fetchUserImageCorner()
 
 const authStore = useAuthStore();
 </script>
@@ -15,7 +19,7 @@ const authStore = useAuthStore();
         <template v-slot:activator="{ props }">
             <v-btn class="custom-hover-primary" variant="text" v-bind="props" icon>
                 <v-avatar size="35">
-                    <img src="@/assets/images/profile/user-1.jpg" width="35" alt="Julia" />
+                    <img :src="`http://videoportaldenegocios.online/${userStore.userAvatar.avatar_profile_image}`" width="35" alt="Julia" />
                 </v-avatar>
             </v-btn>
         </template>

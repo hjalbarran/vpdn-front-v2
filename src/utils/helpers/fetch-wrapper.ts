@@ -27,11 +27,14 @@ function request(method: string) {
 
 function authHeader(url: any) {
     // return auth header with jwt if user is logged in and request is to the api url
+    console.log("url: ", url)
     const { user } = useAuthStore();
-    const isLoggedIn = !!user?.Authorization;
+    const isLoggedIn = !!user?.data.Authorization;
+    console.log("isLoggedIn: ", isLoggedIn)
     const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL);
+    console.log("isApiUrl: ", isApiUrl)
     if (isLoggedIn && isApiUrl) {
-        return { Authorization: `Bearer ${user.Authorization}` };
+        return { Authorization: `Bearer ${user.data.Authorization}` };
     } else {
         return {};
     }
