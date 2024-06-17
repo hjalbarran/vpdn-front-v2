@@ -11,6 +11,11 @@ const MainRoutes = {
             path: '/',
             component: () => import('@/views/StarterPage.vue')
         },
+        {
+            name: 'businesses',
+            path: '/businesses',
+            component: () => import('@/views/businesses.vue')
+        },
     ]
 };
 

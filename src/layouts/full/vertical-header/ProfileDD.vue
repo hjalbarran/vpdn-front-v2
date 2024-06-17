@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { MailIcon } from 'vue-tabler-icons';
 import { profileDD } from '@/_mockApis/headerData';
-
 import { useAuthStore } from '@/stores/auth';
-import { useUserStore } from '@/stores/user';
+import { useUser } from '@/composables/shared/useUser';
 
-const userStore = useUserStore()
-userStore.fetchUserImageCorner()
+
+const { userImages, userData, userRoles, getUserData, getUserImages  } = useUser()
+getUserData()
+getUserImages()
 
 const authStore = useAuthStore();
 </script>
@@ -19,7 +20,7 @@ const authStore = useAuthStore();
         <template v-slot:activator="{ props }">
             <v-btn class="custom-hover-primary" variant="text" v-bind="props" icon>
                 <v-avatar size="35">
-                    <img :src="`http://videoportaldenegocios.online/${userStore.userAvatar.avatar_profile_image}`" width="35" alt="Julia" />
+                    <img :src="`http://videoportaldenegocios.online/${userImages.avatar_profile_image}`" width="35" alt="Julia" />
                 </v-avatar>
             </v-btn>
         </template>
@@ -28,14 +29,14 @@ const authStore = useAuthStore();
                 <h6 class="text-h5 font-weight-medium">User Profile</h6>
                 <div class="d-flex align-center mt-4 pb-6">
                     <v-avatar size="80">
-                        <img src="@/assets/images/profile/user-1.jpg" width="80" />
+                        <img :src="`http://coyag-pdn.test/${userImages.original_profile_image}`" width="80" />
                     </v-avatar>
                     <div class="ml-3">
-                        <h6 class="text-h6 mb-n1">Mathew Anderson</h6>
-                        <span class="text-subtitle-1 font-weight-regular textSecondary">Designer</span>
+                        <h6 class="text-h6 mb-n1">{{ userData.name }} {{ userData.surname }}</h6>
+                        <span class="text-subtitle-1 font-weight-regular textSecondary">{{ userRoles.map((i:any) => i.name_role).join('') }}</span>
                         <div class="d-flex align-center mt-1">
                             <MailIcon size="18" stroke-width="1.5" />
-                            <span class="text-subtitle-1 font-weight-regular textSecondary ml-2">info@modernize.com</span>
+                            <span class="text-subtitle-1 font-weight-regular textSecondary ml-2">{{ userData.email }}</span>
                         </div>
                     </div>
                 </div>

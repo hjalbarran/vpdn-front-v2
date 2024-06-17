@@ -6,30 +6,39 @@ import { fetchWrapper } from '@/utils/helpers/fetch-wrapper';
 export const useUserStore = defineStore({
     id: 'user',
     state: () => ({
-        userAvatar: {} as Avatar,
-        returnUrl: String
+        userImages: {} as Avatar,
+        userData: {} as userData,
+        userRoles: [],
     }),
     actions: {
-        async fetchUserImageCorner() {
-            // const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
+        async fetchUserImages() {
             const imageAvatar = await fetchWrapper.get('/user/image-profile');
-            // update pinia state
-            this.userAvatar = imageAvatar.data;
-
+            this.userImages = imageAvatar.data;
         },
         async fetchUserData() {
-            // const user = await fetchWrapper.post(`${baseUrl}/authenticate`, { username, password });
-            const imageAvatar = await fetchWrapper.get('/user/image-profile');
-            // update pinia state
-            this.userAvatar = imageAvatar.data;
-
-        },
+            const data = await fetchWrapper.get('/auth/user');
+            this.userData = data.data.data;
+            this.userRoles = data.data.roles;
+        }
     }
 });
 
 interface Avatar {
-    avatar_profile_image: string
-    original_profile_image: number
-    status: string,
-    thumbnail_profile_image: string
-  }
+    avatar_profile_image: string;
+    original_profile_image: number;
+    status: string;
+    thumbnail_profile_image: string;
+}
+interface userData {
+    id: number;
+    email: string;
+    name: string;
+    surname: string;
+    employee_id: number;
+}
+
+interface UserRolesArray {
+    id_role: number;
+    name_role: string;
+    slug_role: string;
+}

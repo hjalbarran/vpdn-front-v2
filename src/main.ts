@@ -28,6 +28,10 @@ import VueScrollTo from 'vue-scrollto';
 //LightBox
 import VueEasyLightbox from 'vue-easy-lightbox';
 
+// Toast vue3 toastfy
+import Vue3Toasity, { type ToastContainerOptions } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 const i18n = createI18n({
     locale: 'en',
     messages: messages,
@@ -48,6 +52,10 @@ app.use(VueTablerIcons);
 app.use(i18n);
 app.use(Maska);
 app.use(VueApexCharts);
+app.use(Vue3Toasity, {
+    autoClose: 3000
+    // ...
+} as ToastContainerOptions);
 app.use(vuetify).mount('#app');
 
 //ScrollTop Use
