@@ -23,7 +23,7 @@ const breadcrumbs = ref([
     <BaseBreadcrumb :title="page.title" :breadcrumbs="breadcrumbs"></BaseBreadcrumb>
     <v-row>
         <v-col cols="12" md="12">
-            <UiParentCard title="Simple Title"> test </UiParentCard>
+            <UiParentCard title="Simple Title"> test 123333 </UiParentCard>
         </v-col>
     </v-row>
 </template>

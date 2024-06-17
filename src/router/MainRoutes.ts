@@ -14,7 +14,7 @@ const MainRoutes = {
         {
             name: 'businesses',
             path: '/businesses',
-            component: () => import('@/views/businesses.vue')
+            component: () => import('@/views/videoportal/VideoPortal.vue')
         },
     ]
 };

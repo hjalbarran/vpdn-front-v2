@@ -20,7 +20,7 @@ const authStore = useAuthStore();
         <template v-slot:activator="{ props }">
             <v-btn class="custom-hover-primary" variant="text" v-bind="props" icon>
                 <v-avatar size="35">
-                    <img :src="`http://videoportaldenegocios.online/${userImages.avatar_profile_image}`" width="35" alt="Julia" />
+                    <img :src="`http://coyag-pdn.test/${userImages.avatar_profile_image}`" width="35" alt="Julia" />
                 </v-avatar>
             </v-btn>
         </template>
