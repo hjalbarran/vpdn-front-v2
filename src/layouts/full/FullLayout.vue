@@ -7,6 +7,7 @@ import HorizontalSidebar from './horizontal-sidebar/HorizontalSidebar.vue';
 import Customizer from './customizer/Customizer.vue';
 import { useCustomizerStore } from '../../stores/customizer';
 import { pl, zhHans } from 'vuetify/locale'
+import { SettingsIcon } from 'vue-tabler-icons';
 const customizer = useCustomizerStore();
 </script>
 

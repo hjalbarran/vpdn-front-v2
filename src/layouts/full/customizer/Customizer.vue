@@ -8,6 +8,7 @@ import {
     LayoutDistributeHorizontalIcon,
     LayoutDistributeVerticalIcon,
     LayoutNavbarIcon,
+    LayoutSidebarIcon,
     LayoutSidebarLeftCollapseIcon
 } from 'vue-tabler-icons';
 

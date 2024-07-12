@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed,reactive } from 'vue';
 import AppBaseCard from '@/components/shared/AppBaseCard.vue';
 //Types
 // import type { Products } from '@/types/apps/EcommerceType';
-import type { Products } from '@/types/apps/EcommerceType';
+import type { Products, Business } from '@/types/apps/EcommerceType';
 import ProductItemVue from '@/components/apps/ecommerce/listing/ProductItem.vue';
+import BusinessItem from '@/components/apps/ecommerce/listing/BusinessItem.vue';
 import { useEcomStore } from '@/stores/apps/eCommerce';
 import { orderBy, filter, includes } from 'lodash';
 
@@ -15,12 +16,44 @@ import ProductFilters from '@/components/apps/ecommerce/listing/ProductFilters.v
 // ecommmerce
 const store = useEcomStore();
 
+// // data
+// const businessTypeFilter = ref(null),
+
+const filteredObj = reactive({
+        business_type_id: 1,
+        id_code: null,
+        min_investment: null,
+        max_investment: null,
+        min_rental: null,
+        max_rental: null,
+        name: null,
+        province_id: null,
+        order_by: 'most_relevant',
+        neighborhood: null,
+        sectors: null,
+        my_favorite: 0,
+        condition: null,
+        only_with_gcs: 0,
+        flag_smoke_outlet: null,
+        flag_terrace: null,
+        flag_recent: null,
+        flag_outstanding: null,
+        page: 1,
+        perPage: 12,
+        add_timeline: 1
+      })
+
 onMounted(() => {
     store.fetchProducts();
+    store.fetchBusinessesToPublic(filteredObj);
 });
 
 const getProducts = computed(() => {
     return store.products;
+});
+
+const getBusinesses = computed(() => {
+    return store.businessesItems;
 });
 
 const selected = ref('Price:Low to High');
@@ -87,9 +120,23 @@ const getVisibleProduct = (
     return products;
 };
 
+const getVisibleBusinesses = (
+    businesses: Business | any,
+) => {
+    // SORT BY
+    
+
+    return businesses;
+};
+
 const filteredProducts = computed(() => {
     return getVisibleProduct(getProducts.value, selected.value, searchValue, store.gender, store.category, store.color,store.price);
 });
+
+const filteredBusinesses = computed(() => {
+    return getVisibleBusinesses(getBusinesses.value);
+});
+
 const toggleSide = ref(false);
 
 function AddCart(p: number) {
@@ -128,7 +175,7 @@ function AddCart(p: number) {
                             </v-sheet>
                         </div>
                         <v-row v-if="filteredProducts.length >= 1">
-                            <v-col cols="12" lg="4" sm="6" v-for="product in filteredProducts" :key="product.id">
+                            <!-- <v-col cols="12" lg="4" sm="6" v-for="product in filteredProducts" :key="product.id">
                                 <ProductItemVue
                                     :name="product.name"
                                     :image="product.image"
@@ -138,6 +185,24 @@ function AddCart(p: number) {
                                     :rating="product.rating"
                                     :goto="product.id"
                                     @handlecart="AddCart(product)"
+                                />
+                            </v-col> -->
+                            <v-col cols="12" lg="4" sm="6" v-for="business in filteredBusinesses" :key="business.id_code_business">
+                                <BusinessItem
+                                    :desc="business.name_business_type"
+                                    :goto="business.id_code_business"
+                                    :id="business.id_code_business"
+                                    :image="business.business_images_string.substring(0, business.business_images_string.indexOf(';'))"
+                                    :investmentBusiness="business.investment_business"
+                                    :name_district="business.name_district"
+                                    :name_neighborhood="business.name_neighborhood"
+                                    :name_province="business.name_province"
+                                    :name="business.name_business"
+                                    :offerPrice="business.rental"
+                                    :rating="business.rating"
+                                    :sector="business.sector"
+                                    :sourcePlatform="business.source_platform"
+                                    @handlecart="AddCart(business)"
                                 />
                             </v-col>
                         </v-row>

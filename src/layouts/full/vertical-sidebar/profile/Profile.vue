@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/stores/auth';
+import { PowerIcon } from 'vue-tabler-icons';
 
 const authStore = useAuthStore();
 </script>

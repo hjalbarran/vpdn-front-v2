@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { useEcomStore } from '@/stores/apps/eCommerce';
+import { CheckIcon } from 'vue-tabler-icons';
 
 const panel = ref([0, 1, 2, 3, 4]);
 const priceSort = [

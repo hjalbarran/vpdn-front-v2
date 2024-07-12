@@ -4,10 +4,12 @@ import axios from '@/utils/axios';
 // types
 import type { ProductStateProps } from '@/types/apps/EcommerceType';
 import { filter, map, sum } from 'lodash';
+import { fetchWrapper } from '@/utils/helpers/fetch-wrapper';
 
 export const useEcomStore = defineStore({
     id: 'eCommerceone',
     state: (): ProductStateProps => ({
+        businessesItems: [],
         products: [],
         cart: [],
         gender: '',
@@ -17,7 +19,7 @@ export const useEcomStore = defineStore({
         discount: 5,
         total: 0,
         addresses: [],
-        color: 'All',
+        color: 'All'
     }),
     getters: {},
     actions: {
@@ -26,6 +28,24 @@ export const useEcomStore = defineStore({
             try {
                 const data = await axios.get('/api/products/list');
                 this.products = data.data;
+            } catch (error) {
+                alert(error);
+                console.log(error);
+            }
+        },
+        // Fetch Customers from action
+        async fetchBusinessesToPublic(filters: any) {
+            let filtersArray: string[] = [];
+            Object.keys(filters).forEach((key) => {
+                if (filters[key]) {
+                    filtersArray.push(`${key}=${filters[key]}`);
+                }
+            });
+            const queryString:string = filtersArray.length > 0 ? '?' + filtersArray.join('&') : ''
+            const url:string = `/business/index${queryString}`
+            try {
+                const data = await fetchWrapper.get(url);
+                this.businessesItems = data.data.businesses;
             } catch (error) {
                 alert(error);
                 console.log(error);
@@ -115,8 +135,6 @@ export const useEcomStore = defineStore({
         },
 
         //Reset Filter
-        filterReset(){}
-
-
+        filterReset() {}
     }
 });

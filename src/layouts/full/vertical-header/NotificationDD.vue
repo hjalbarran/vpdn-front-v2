@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {notifications} from '@/_mockApis/headerData';
+import { BellRingingIcon } from 'vue-tabler-icons';
 </script>
 <template>
     <!-- ---------------------------------------------- -->

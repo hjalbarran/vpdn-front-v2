@@ -13,7 +13,7 @@ import product7 from '@/assets/images/products/s7.jpg';
 import product8 from '@/assets/images/products/s8.jpg';
 
 //Types
-import type { Products } from '@/types/apps/EcommerceType';
+import type { Products, Business } from '@/types/apps/EcommerceType';
 
 const chance = new Chance();
 // products list
@@ -177,7 +177,47 @@ const products: Products[] = [
         qty: 1,
         rank:80,
         price:'151'
-    }
+    },
+    {
+        id: 9,
+        image: product8,
+        name: 'Shoes for Girls2',
+        description: chance.paragraph({ sentences: 2 }),
+        rating: chance.floating({ min: 0.1, max: 5.0 }),
+        discount: 20,
+        salePrice: 130,
+        offerPrice: 105,
+        gender: 'female',
+        categories: ['toys'],
+        colors: ['lightsuccess', 'primary', 'success'],
+        popularity: chance.natural(),
+        date: chance.natural(),
+        created: sub(new Date(), { days: 0, hours: 11, minutes: 10 }),
+        isStock: true,
+        qty: 1,
+        rank:80,
+        price:'151'
+    },
+    {
+        id: 10,
+        image: product8,
+        name: 'Shoes for Girls3',
+        description: chance.paragraph({ sentences: 2 }),
+        rating: chance.floating({ min: 0.1, max: 5.0 }),
+        discount: 20,
+        salePrice: 130,
+        offerPrice: 105,
+        gender: 'female',
+        categories: ['toys'],
+        colors: ['lightsuccess', 'primary', 'success'],
+        popularity: chance.natural(),
+        date: chance.natural(),
+        created: sub(new Date(), { days: 0, hours: 11, minutes: 10 }),
+        isStock: true,
+        qty: 1,
+        rank:80,
+        price:'151'
+    },
 ];
 
 // ==============================|| MOCK SERVICES ||============================== //

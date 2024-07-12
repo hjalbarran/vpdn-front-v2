@@ -3,7 +3,7 @@
  */
 
 import axios from "axios";
-const baseURL = 'http://coyag-pdn.test/api/'
+const baseURL = 'http://coyag-backend.test/api/'
 
 const axiosServices = axios.create({
   baseURL,

@@ -1,4 +1,6 @@
 <script setup>
+import { DotsIcon } from 'vue-tabler-icons';
+
 const props = defineProps({ item: Object });
 </script>
 

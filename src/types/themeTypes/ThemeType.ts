@@ -27,5 +27,6 @@ export type ThemeTypes = {
         'on-surface-variant'?: string;
         grey100?: string;
         grey200?: string;
+        vpLigthYellow?: string;
     };
 };

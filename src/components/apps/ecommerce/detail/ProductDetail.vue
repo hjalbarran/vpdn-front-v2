@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router';
 import ProductCarousel from './ProductCarousel.vue';
 import ProductTab from './ProductTab.vue';
 import RelatedProducts from './RelatedProducts.vue';
+import { CheckIcon } from 'vue-tabler-icons';
 
 const store = useEcomStore();
 const route = useRoute();

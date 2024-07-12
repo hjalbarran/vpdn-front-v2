@@ -31,7 +31,8 @@ const BLUE_THEME: ThemeTypes = {
         surface: '#fff',
         'on-surface-variant': '#fff',
         grey100: '#F2F6FA',
-        grey200: '#EAEFF4'
+        grey200: '#EAEFF4', 
+        vpLigthYellow: '#FAEDAA',
     }
 };
 
